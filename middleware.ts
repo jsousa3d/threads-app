@@ -1,30 +1,14 @@
 // Resource: https://clerk.com/docs/nextjs/middleware#auth-middleware
 // Copy the middleware code as it is from the above resource
 
-import { NextResponse } from "next/server";
-import { authMiddleware, redirectToSignIn } from "@clerk/nextjs";
+import { authMiddleware } from "@clerk/nextjs";
 
 export default authMiddleware({
-  afterAuth(auth, req, evt) {
-    // Handle unauthenticated users
-    if (!auth.userId && !auth.isPublicRoute) {
-      return redirectToSignIn({ returnBackUrl: req.url });
-    }
+  // An array of public routes that don't require authentication.
+  publicRoutes: ["/api/webhook/clerk"],
 
-    // Redirect authenticated users without an organization to the org-selection page
-    if (auth.userId && !auth.orgId && req.nextUrl.pathname !== "/org-selection") {
-      const orgSelection = new URL("/org-selection", req.url);
-      return NextResponse.redirect(orgSelection);
-    }
-
-    // Allow authenticated users to access protected routes
-    if (auth.userId && !auth.isPublicRoute) {
-      return NextResponse.next();
-    }
-
-    // Allow access to public routes
-    return NextResponse.next();
-  },
+  // An array of routes to be ignored by the authentication middleware.
+  ignoredRoutes: ["/api/webhook/clerk"],
 });
 
 export const config = {
