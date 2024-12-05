@@ -4,6 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const rivibeLinks = [
+  { route: "/profile", label: "Profile", imgURL: "/assets/profile.svg" },
+  { route: "/upload", label: "Daily Upload", imgURL: "/assets/upload.svg" },
+  { route: "/matches", label: "Matches", imgURL: "/assets/matches.svg" },
+];
 import { sidebarLinks } from "@/constants";
 
 function Bottombar() {
