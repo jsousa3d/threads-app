@@ -5,27 +5,39 @@ import Link from "next/link";
 
 function Topbar() {
   return (
-    <nav className='topbar'>
-      <Link href='/' className='flex items-center gap-4'>
-        <Image src='/logo.svg' alt='logo' width={28} height={28} />
-        <p className='text-heading3-bold text-light-1 max-xs:hidden'>Threads</p>
+    <nav className="topbar">
+      <Link href="/" className="flex items-center gap-4">
+        <Image src="/assets/rivibe-logo.svg" alt="Rivibe Logo" width={28} height={28} />
+        <p className="text-heading3-bold text-light-1 max-xs:hidden">Rivibe</p>
       </Link>
 
-      <div className='flex items-center gap-1'>
-        <div className='block md:hidden'>
-          <SignedIn>
-            <SignOutButton>
-              <div className='flex cursor-pointer'>
-                <Image
-                  src='/assets/logout.svg'
-                  alt='logout'
-                  width={24}
-                  height={24}
-                />
-              </div>
-            </SignOutButton>
-          </SignedIn>
-        </div>
+      <div className="flex items-center gap-4">
+        <Link href="/notifications" className="relative">
+          <Image
+            src="/assets/notifications.svg"
+            alt="Notifications"
+            width={24}
+            height={24}
+            className="object-contain"
+          />
+          <span className="absolute top-0 right-0 bg-primary-500 text-xs text-white rounded-full px-1">
+            3 {/* Placeholder for notification count */}
+          </span>
+        </Link>
+
+        <SignedIn>
+          <SignOutButton>
+            <div className="flex cursor-pointer">
+              <Image
+                src="/assets/logout.svg"
+                alt="Logout"
+                width={24}
+                height={24}
+                className="object-contain"
+              />
+            </div>
+          </SignOutButton>
+        </SignedIn>
 
         <OrganizationSwitcher
           appearance={{
@@ -37,6 +49,10 @@ function Topbar() {
         />
       </div>
     </nav>
+  );
+}
+
+export default Topbar;
   );
 }
 
